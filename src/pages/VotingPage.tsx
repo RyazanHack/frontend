@@ -1,13 +1,13 @@
 import { Option, Select, Typography } from '@material-tailwind/react'
 import { useEffect, useState } from 'react'
-import russianGeo from '../../public/russia.json'
+import { getRegions } from '../utils/getRegions'
 
 const VotingPage = () => {
-	const [dataGeo, setDataGeo] = useState(russianGeo)
+	const [regions, setRegions] = useState(getRegions())
 
 	useEffect(() => {
-		
-	}, [])
+		console.log(regions)
+	}, [regions])
 
 	return (
 		<div>
