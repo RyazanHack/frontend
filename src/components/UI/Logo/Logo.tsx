@@ -1,8 +1,15 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
+import RoutePaths from '../../../router/Routes';
 
 const Logo: FC = () => {
+	const navigate = useNavigate();
+
 	return (
-		<div className='flex flex-row justify-center items-center cursor-pointer'>
+		<div 
+			className='flex flex-row justify-center items-center cursor-pointer'
+			onClick={() => navigate(RoutePaths.HOME)}
+		>
 			<img
 				className='w-[25px] lg:w-[40px]'
 				src='/icons/logo/bitracking.svg'

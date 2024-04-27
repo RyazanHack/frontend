@@ -4,15 +4,26 @@ import {
 	Checkbox,
 	Input,
 	Typography,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
 } from '@material-tailwind/react'
 import {DatePicker} from '../DatePicker/DatePicker'
+import { useState } from 'react';
+import RoutePaths from '../../../router/Routes';
+import { useNavigate } from 'react-router-dom';
 
-export function SimpleRegistrationForm() {
+export function RegistrationForm() {
+  const navigate = useNavigate();
+
+  const [gender, setGender] = useState<string>("");
+
 	return (
 		<>
 		<Card color='transparent' shadow={false}>
 			<Typography variant='h4' color='blue-gray'>
-				Войти
+				Регистрация
 			</Typography>
 			<Typography color='gray' className='mt-1 font-normal'>
 				Введите данные для регистрации:
@@ -45,6 +56,38 @@ export function SimpleRegistrationForm() {
 						Дата рождения:
 					</Typography>
           <DatePicker/>
+
+          
+          <Typography variant='h6' color='blue-gray' className='-mb-3'>
+						Пол:
+					</Typography>
+          <Menu placement="bottom-start">
+            <MenuHandler>
+              <Button
+                ripple={false}
+                variant="text"
+                color="blue-gray"
+                className="flex h-10 items-center gap-2 border border-blue-gray-200 pl-3"
+              >
+                {gender}
+              </Button>
+            </MenuHandler>
+            <MenuList className="max-h-[20rem] max-w-[18rem]">
+              {["Мужской", "Женский"].map((gender, index) => {
+                return (
+                  <MenuItem
+                    key={index}
+                    value={gender}
+                    className="flex "
+                    onClick={() => setGender(gender)}
+                  >
+                    <span>{gender}</span>
+                  </MenuItem>
+                );
+              })}
+            </MenuList>
+          </Menu>
+
           <Typography variant='h6' color='blue-gray' className='-mb-3'>
 						Номер телефона:
 					</Typography>
@@ -94,7 +137,7 @@ export function SimpleRegistrationForm() {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="-mt-px h-4 w-4"
+              className="-mt-px h-6 w-6"
             >
               <path
                 fillRule="evenodd"
@@ -144,7 +187,10 @@ export function SimpleRegistrationForm() {
 				</Button>
 				<Typography color='gray' className='mt-4 text-center font-normal'>
 					Уже есть аккаунт?{' '}
-					<a href='#' className='font-medium text-gray-900'>
+					<a 
+						className='font-medium text-gray-900 cursor-pointer'
+            onClick={() => navigate(RoutePaths.LOGIN)}
+					>
 						Войти
 					</a>
 				</Typography>
