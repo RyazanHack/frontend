@@ -10,7 +10,7 @@ const AppRouter = () => {
 		SignupPage,
 		LoginPage,
 		VotingPage,
-		ProfilePage
+		ProfilePage,
 	] = multiLazy([
 		() => import('../pages/HomePage'),
 		() => import('../pages/SignupPage'),
