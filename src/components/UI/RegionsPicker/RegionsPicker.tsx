@@ -32,7 +32,7 @@ const RegionsPicker: FC<RegionsPickerProps> = ({ setExternalRegion }) => {
 	}
 
 	return (
-		<div className='w-72 relative ml-5'>
+		<div className='w-72 relative'>
 			<input
 				type='text'
 				placeholder='Поиск по регионам'
