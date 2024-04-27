@@ -1,5 +1,6 @@
 enum RoutePaths {
 	HOME = '/',
+	SIGNUP = '/signup',
 	LOGIN = '/login'
 }
 

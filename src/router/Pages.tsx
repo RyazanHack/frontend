@@ -7,9 +7,11 @@ import Header from '../components/UI/Header/Header'
 const AppRouter = () => {
 	const [
 		HomePage,
+		SignupPage,
 		LoginPage
 	] = multiLazy([
 		() => import('../pages/HomePage'),
+		() => import('../pages/SignupPage'),
 		() => import('../pages/LoginPage')
 	])
 
@@ -23,6 +25,7 @@ const AppRouter = () => {
           </>
         }>
           <Route path={RoutePaths.HOME} element={<HomePage />} />
+          <Route path={RoutePaths.SIGNUP} element={<SignupPage />} />
           <Route path={RoutePaths.LOGIN} element={<LoginPage />} />
         </Route>
 			</Routes>
