@@ -17,6 +17,16 @@ export interface LoginRequest {
   password: string,
 }
 
+export interface User {
+  name: string,
+  surname: string,
+  phone: string,
+  gender: "male" | "female",
+  date_of_birth: string,
+  email: string,
+  region: string
+}
+
 export default class UserService {
 	private static API = MAIN_API
 
@@ -26,6 +36,21 @@ export default class UserService {
 
     localStorage["token"] = token;
 	}
+
+  public static async info(): Promise<User> {
+    const token = localStorage["token"];
+
+    let config = {
+      headers: {
+       Authorization: `Bearer ${token}`,
+       'content-type': 'application/json',
+      },
+     }
+   
+     const response = await axios.post(this.API + '/user/self', {}, config)
+
+     return response.data
+  }
 
   public static async login(user: LoginRequest): Promise<void> {
 		const response = await axios.post(this.API + '/user/token', user)
