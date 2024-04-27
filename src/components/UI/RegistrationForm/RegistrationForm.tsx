@@ -15,9 +15,11 @@ import RoutePaths from '../../../router/Routes';
 import { useNavigate } from 'react-router-dom';
 import RegionsPicker from '../RegionsPicker/RegionsPicker';
 import UserService, { SignupRequest } from '../../../API/UserService';
+import { useLogined } from '../../../states/logined';
 
 export function RegistrationForm() {
   const navigate = useNavigate();
+	const {setLogined} = useLogined();
 
   const [checked, setChecked] = useState<boolean>(false);
 
@@ -235,6 +237,7 @@ export function RegistrationForm() {
           fullWidth
           onClick={() => {
             checked && UserService.signup(data).then(() => {
+              setLogined(true)
               navigate(RoutePaths.HOME)
             });
           }}
