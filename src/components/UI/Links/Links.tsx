@@ -13,6 +13,10 @@ const LINKS = [
 		title: 'Голосование',
 	},
 	{
+		href: RoutePaths.PATH_PAGE,
+		title: '✅ Маршруты',
+	},
+	{
 		href: RoutePaths.ADMIN_PANEL,
 		title: 'Панель администратора',
 	},

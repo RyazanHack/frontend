@@ -22,10 +22,7 @@ const VotingPage = () => {
 
 	const handleUpvote = useCallback(() => {
 		// TODO: Change to localstorage
-		VotingService.upvote(
-			currentRegion,
-			1
-		)
+		VotingService.upvote(currentRegion, 1)
 		console.log(currentRegion)
 	}, [currentRegion])
 
@@ -34,7 +31,7 @@ const VotingPage = () => {
 	}, [currentRegion])
 
 	return (
-		<div className='flex flex-col mt-10'>
+		<div className='flex flex-col'>
 			<Typography className='m-5' variant='h1' color='blue-gray'>
 				Регионы для голосования
 			</Typography>
