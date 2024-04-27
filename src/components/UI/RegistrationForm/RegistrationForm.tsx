@@ -13,6 +13,7 @@ import {DatePicker} from '../DatePicker/DatePicker'
 import { useState } from 'react';
 import RoutePaths from '../../../router/Routes';
 import { useNavigate } from 'react-router-dom';
+import RegionsPicker from '../RegionsPicker/RegionsPicker';
 
 export function RegistrationForm() {
   const navigate = useNavigate();
@@ -104,7 +105,13 @@ export function RegistrationForm() {
               }}
             />
           </div>
-					<Typography variant='h6' color='blue-gray' className='-mb-3'>
+
+          <Typography variant='h6' color='blue-gray' className='-mb-3'>
+						Регион:
+					</Typography>
+
+          <RegionsPicker/>
+					{/* <Typography variant='h6' color='blue-gray' className='-mb-3'>
 						Ваша электронная почта:
 					</Typography>
 					<Input
@@ -115,7 +122,7 @@ export function RegistrationForm() {
 						labelProps={{
 							className: 'before:content-none after:content-none',
 						}}
-					/>
+					/> */}
 					<Typography variant='h6' color='blue-gray' className='-mb-3'>
 						Пароль
 					</Typography>
