@@ -68,7 +68,9 @@ export function LoginForm() {
           className='mt-6' 
           fullWidth
           onClick={() => {
-            UserService.login(data);
+            UserService.login(data).then(() => {
+              navigate(RoutePaths.HOME)
+            });
           }}
         >
 					Войти

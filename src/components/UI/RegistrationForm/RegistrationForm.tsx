@@ -234,7 +234,9 @@ export function RegistrationForm() {
           className='mt-6' 
           fullWidth
           onClick={() => {
-            checked && UserService.signup(data);
+            checked && UserService.signup(data).then(() => {
+              navigate(RoutePaths.HOME)
+            });
           }}
         >
 					Зарегистрироваться
