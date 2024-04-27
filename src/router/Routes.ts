@@ -5,7 +5,8 @@ enum RoutePaths {
 	VOTING = '/voting',
 	PROFILE = '/profile',
 	ADMIN_PANEL = '/panel',
-	BILLING_PAGE = '/payment/:key'
+	BILLING_PAGE = '/payment/:key',
+	PATH_PAGE = '/paths'
 }
 
 export default RoutePaths
