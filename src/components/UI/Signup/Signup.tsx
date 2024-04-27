@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RoutePaths from '../../../router/Routes'
+import { useLogined } from '../../../states/logined'
 
 interface GetWalletProps {
 	className?: string
@@ -9,7 +10,7 @@ interface GetWalletProps {
 const Signup: FC<GetWalletProps> = ({ className }) => {
 	const navigate = useNavigate();
 
-	const logined = !!localStorage["token"]
+	const {logined} = useLogined();
 
 	return (
 		<div className='flex gap-10'>

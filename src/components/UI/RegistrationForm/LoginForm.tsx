@@ -8,9 +8,12 @@ import { useNavigate } from 'react-router-dom';
 import RoutePaths from '../../../router/Routes';
 import UserService, { LoginRequest } from '../../../API/UserService';
 import { useState } from 'react';
+import { useLogined } from '../../../states/logined';
 
 export function LoginForm() {
 	const navigate = useNavigate();
+
+	const {setLogined} = useLogined();
 
 	const [data, setData] = useState<LoginRequest>({
 		password: "",
@@ -69,6 +72,7 @@ export function LoginForm() {
           fullWidth
           onClick={() => {
             UserService.login(data).then(() => {
+				      setLogined(true)
               navigate(RoutePaths.HOME)
             });
           }}
