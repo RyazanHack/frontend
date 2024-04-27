@@ -10,8 +10,12 @@ const LINKS = [
 	},
 	{
 		href: RoutePaths.PROFILE,
-		title: 'Личный кабинет',
+		title: 'Личный кабинет'
 	},
+	{
+		href: RoutePaths.ADMIN_PANEL,
+		title: 'Панель администратора'
+	}
 ]
 
 const Links: FC = () => {
