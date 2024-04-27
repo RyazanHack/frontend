@@ -6,6 +6,7 @@ import {
 } from "@material-tailwind/react";
 import { FC } from "react";
 import YMap from "../Map/Map";
+import { getCapital } from "../../../utils/getRegions";
 
 interface RouteProps {
   region: string,
@@ -24,7 +25,7 @@ export const Route: FC<RouteProps> = ({ region, coords, name }) => {
                   className="font-semibold">
         {name}
       </Typography>
-      <YMap center="Рязань" coords={coords} readOnly/>
+      <YMap center={getCapital(region)} coords={coords} readOnly/>
     </div>
   );
 }

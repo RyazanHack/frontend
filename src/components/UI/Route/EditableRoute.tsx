@@ -1,16 +1,17 @@
 import {
-  Card,
-  CardHeader,
-  CardBody,
   Typography,
   Input,
 } from "@material-tailwind/react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import YMap from "../Map/Map";
 import RegionsPicker from "../RegionsPicker/RegionsPicker";
+import { getCapital } from "../../../utils/getRegions";
 
 
 export const EditableRoute: FC = () => {
+  const [region, setRegion] = useState<string>()
+  
+
   return (
     <div className='mb-1 flex flex-col gap-6 w-80'>
       <Typography variant='h6' color='blue-gray' className='-mb-3'>
@@ -28,12 +29,18 @@ export const EditableRoute: FC = () => {
         Регион:
       </Typography>
 
-      <RegionsPicker/>
+      <RegionsPicker
+        setExternalRegion={setRegion}
+      />
       
-      <Typography variant='h6' color='blue-gray' className='-mb-3'>
-        Точки маршрута:
-      </Typography>
-      <YMap center="Рязань"/>
+      {region &&
+      <>
+        <Typography variant='h6' color='blue-gray' className='-mb-3'>
+          Точки маршрута:
+        </Typography>
+        <YMap center={getCapital(region)}/>
+      </>
+      }
     </div>
   );
 }
