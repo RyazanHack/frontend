@@ -4,7 +4,7 @@ import { SimpleRegistrationForm } from '../components/UI/SimpleRegistrationForm/
 const HomePage = () => {
 	return (
 		<>
-			<div className='flex flex-row justify-center items-center'>
+			<div className='flex flex-row justify-center items-center mt-10'>
 				<SimpleRegistrationForm/>
 			</div>
 		</>

@@ -10,13 +10,8 @@ import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { ru } from 'date-fns/locale';
 
-interface IDatePicker {
-    label: string
-}
  
-export const DatePicker: FC<IDatePicker> = ({
-    label
-  }) => {
+export const DatePicker: FC = () => {
   const [date, setDate] = React.useState<Date>();
  
   return (
@@ -24,9 +19,8 @@ export const DatePicker: FC<IDatePicker> = ({
       <Popover placement="bottom">
         <PopoverHandler>
           <Input
-            label={label}
             onChange={() => null}
-            value={date ? format(date, "PPP") : ""}
+            value={date ? format(date, "PPP", {locale: ru}) : ""}
           />
         </PopoverHandler>
         <PopoverContent>

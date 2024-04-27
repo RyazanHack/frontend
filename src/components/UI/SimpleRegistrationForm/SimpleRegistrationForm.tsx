@@ -41,6 +41,26 @@ export function SimpleRegistrationForm() {
 							className: 'before:content-none after:content-none',
 						}}
 					/>
+          <Typography variant='h6' color='blue-gray' className='-mb-3'>
+						Дата рождения:
+					</Typography>
+          <DatePicker/>
+          <Typography variant='h6' color='blue-gray' className='-mb-3'>
+						Номер телефона:
+					</Typography>
+          <div className="relative flex w-full max-w-[24rem]">
+            <div className="flex rounded-md h-10 items-center gap-2 border border-blue-gray-200 bg-blue-gray-500/10 border-solid rounded-r-none border border-r-0 pl-3">
+              <span className="flex items-center pr-5">+7</span>
+            </div>
+            <Input
+              type="tel"
+
+              className='rounded-l-none !border-t-blue-gray-200 focus:!border-t-gray-900'
+              labelProps={{
+                className: 'before:content-none after:content-none',
+              }}
+            />
+          </div>
 					<Typography variant='h6' color='blue-gray' className='-mb-3'>
 						Ваша электронная почта:
 					</Typography>
@@ -53,7 +73,6 @@ export function SimpleRegistrationForm() {
 							className: 'before:content-none after:content-none',
 						}}
 					/>
-          <DatePicker label="Дата рождения"/>
 					<Typography variant='h6' color='blue-gray' className='-mb-3'>
 						Пароль
 					</Typography>
