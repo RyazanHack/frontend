@@ -5,43 +5,88 @@ import {
 	Input,
 	Typography,
 } from '@material-tailwind/react'
+import {DatePicker} from '../DatePicker/DatePicker'
 
 export function SimpleRegistrationForm() {
 	return (
 		<>
 		<Card color='transparent' shadow={false}>
 			<Typography variant='h4' color='blue-gray'>
-				Sign Up
+				Войти
 			</Typography>
 			<Typography color='gray' className='mt-1 font-normal'>
-				Nice to meet you! Enter your details to register.
+				Введите данные для регистрации:
 			</Typography>
 			<form className='mt-8 mb-2 w-80 max-w-screen-lg sm:w-96'>
 				<div className='mb-1 flex flex-col gap-6'>
 					<Typography variant='h6' color='blue-gray' className='-mb-3'>
-						Your Name
+						Ваше имя:
 					</Typography>
 					<Input
 						size='lg'
-						placeholder='name@mail.com'
+						placeholder='Иван'
 						className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
 						labelProps={{
 							className: 'before:content-none after:content-none',
 						}}
 					/>
 					<Typography variant='h6' color='blue-gray' className='-mb-3'>
-						Your Email
+						Ваше фамилия:
 					</Typography>
 					<Input
 						size='lg'
-						placeholder='name@mail.com'
+						placeholder='Иванов'
 						className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
 						labelProps={{
 							className: 'before:content-none after:content-none',
 						}}
 					/>
 					<Typography variant='h6' color='blue-gray' className='-mb-3'>
-						Password
+						Ваша электронная почта:
+					</Typography>
+					<Input
+						size='lg'
+						type='email'
+						placeholder='name@mail.com'
+						className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
+						labelProps={{
+							className: 'before:content-none after:content-none',
+						}}
+					/>
+          <DatePicker label="Дата рождения"/>
+					<Typography variant='h6' color='blue-gray' className='-mb-3'>
+						Пароль
+					</Typography>
+					<Input
+						type='password'
+						size='lg'
+						placeholder='********'
+						className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
+						labelProps={{
+							className: 'before:content-none after:content-none',
+						}}
+					/>
+          <Typography
+            variant="small"
+            color="gray"
+            className="mt-2 flex items-center gap-1 font-normal"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="-mt-px h-4 w-4"
+            >
+              <path
+                fillRule="evenodd"
+                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Используйте не менее 8 символов: одну заглавную, одну строчную и одну цифру.
+          </Typography>
+          <Typography variant='h6' color='blue-gray' className='-mb-3'>
+						Повторите пароль
 					</Typography>
 					<Input
 						type='password'
@@ -60,24 +105,28 @@ export function SimpleRegistrationForm() {
 							color='gray'
 							className='flex items-center font-normal'
 						>
-							I agree the
-							<a
-								href='#'
-								className='font-medium transition-colors hover:text-gray-900'
-							>
-								&nbsp;Terms and Conditions
-							</a>
+              <span>
+                Я согласен с &nbsp;
+                <span
+                  className='font-medium transition-colors text-tg-accent hover:text-gray-900'
+                  onClick={(e) => {
+                    e.preventDefault()
+                  }}
+                >
+								  Условиями обработки персональных данных
+                </span>
+              </span>
 						</Typography>
 					}
 					containerProps={{ className: '-ml-2.5' }}
 				/>
 				<Button className='mt-6' fullWidth>
-					sign up
+					Зарегистрироваться
 				</Button>
 				<Typography color='gray' className='mt-4 text-center font-normal'>
-					Already have an account?{' '}
+					Уже есть аккаунт?{' '}
 					<a href='#' className='font-medium text-gray-900'>
-						Sign In
+						Войти
 					</a>
 				</Typography>
 			</form>
