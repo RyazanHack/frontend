@@ -8,6 +8,7 @@ import {
 
 export function SimpleRegistrationForm() {
 	return (
+		<>
 		<Card color='transparent' shadow={false}>
 			<Typography variant='h4' color='blue-gray'>
 				Sign Up
@@ -81,5 +82,6 @@ export function SimpleRegistrationForm() {
 				</Typography>
 			</form>
 		</Card>
+		</>
 	)
 }
