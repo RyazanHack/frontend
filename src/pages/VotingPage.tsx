@@ -1,13 +1,15 @@
-import { Option, Select, Typography } from '@material-tailwind/react'
+import { Typography } from '@material-tailwind/react'
 import { useEffect, useState } from 'react'
+import RegionsPicker from '../components/UI/RegionsPicker/RegionsPicker'
 import { getRegions } from '../utils/getRegions'
 
 const VotingPage = () => {
-	const [regions, setRegions] = useState(getRegions())
+	const [regions] = useState(getRegions())
+	const [currentRegion, setCurrentRegion] = useState<string>('')
 
 	useEffect(() => {
-		console.log(regions)
-	}, [regions])
+		console.log(currentRegion)
+	}, [currentRegion])
 
 	return (
 		<div>
@@ -17,15 +19,7 @@ const VotingPage = () => {
 			<Typography className='m-5' variant='h3' color='gray'>
 				Окружной этап
 			</Typography>
-			<div className='w-72'>
-				<Select label='Select Version'>
-					<Option>Material Tailwind HTML</Option>
-					<Option>Material Tailwind React</Option>
-					<Option>Material Tailwind Vue</Option>
-					<Option>Material Tailwind Angular</Option>
-					<Option>Material Tailwind Svelte</Option>
-				</Select>
-			</div>
+			<RegionsPicker setExternalRegion={setCurrentRegion} />
 		</div>
 	)
 }
