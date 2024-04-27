@@ -4,22 +4,10 @@ import {
   Card,
   CardHeader,
   CardBody,
-  IconButton,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
   Avatar,
-  Tooltip,
   Progress,
+  Button
 } from "@material-tailwind/react";
-
-// import {
-//   statisticsCardsData,
-//   statisticsChartsData,
-//   projectsTableData,
-//   ordersOverviewData,
-// } from "@/data";
 
 import {
 	BanknotesIcon,
@@ -60,8 +48,16 @@ const projectsTableData = [
 
 const AdminPanelPage = () => {
 	return (
-		<div className="mt-12 m-5">
-      <div className="grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+		<div className="mt-3 m-5">
+      <div className="grid grid-cols-2 gap-6 max-w-[50em]">
+        <Button className='mt-6'>
+					Завершить голосование
+				</Button>
+        <Button className='mt-6'>
+					Объявить победителей
+				</Button>
+      </div>
+      <div className="grid gap-y-10 mt-3 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         {statisticsCardsData.map(({ icon, title, ...rest }) => (
           <StatisticsCard
             key={title}

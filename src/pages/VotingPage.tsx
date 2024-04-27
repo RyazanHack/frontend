@@ -23,7 +23,6 @@ const VotingPage = () => {
 	const handleUpvote = useCallback(() => {
 		// TODO: Change to localstorage
 		VotingService.upvote(
-			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsImV4cCI6MTcxNDIzODgxMH0.m8vSxZJHZV80dY4MdfW3QsAD4vEqj6F6ZU_vrTbv38Y',
 			currentRegion,
 			1
 		)

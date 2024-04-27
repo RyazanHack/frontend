@@ -9,10 +9,6 @@ const LINKS = [
 		title: 'Голосование',
 	},
 	{
-		href: RoutePaths.PROFILE,
-		title: 'Личный кабинет'
-	},
-	{
 		href: RoutePaths.ADMIN_PANEL,
 		title: 'Панель администратора'
 	}

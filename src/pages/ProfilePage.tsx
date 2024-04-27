@@ -11,21 +11,39 @@ import {
   TrophyIcon,
 } from "@heroicons/react/24/solid";
 import ProfileInfoCard from '../components/UI/Profile/Profile'
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import UserService, { User } from "../API/UserService";
 
 const ProfilePage = () => {
   const [currentIndex, setIndex] = useState<number>(0);
+
+  const [user, setUser] = useState<User>()
+
+  const getUser = useCallback(async () => {
+    const user = await UserService.info();
+    setUser(user);
+  }, []);
+
+  const gender = {
+    "male": "Мужской",
+    "female": "Женский",
+    "default": ""
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   const components = [
     <ProfileInfoCard
       title="Информация о пользователе"
       details={{
-        "Имя": "Трепалин",
-        "Фамилия": "Александр",
+        "Имя": user?.name,
+        "Фамилия": user?.surname,
         "Дата рождения": "16 июнь 2005",
-        "Пол": "мужской",
-        "Номер телефона": "+7 800 555 35 35",
-        "Регион": "Рязанская область"
+        "Пол": gender[user?.gender || "default"],
+        "Номер телефона": user?.phone,
+        "Регион": user?.region
       }}
     />,
     <div>
@@ -41,7 +59,7 @@ const ProfilePage = () => {
             <div className="flex items-center gap-6">
               <div>
                 <Typography variant="h5" color="blue-gray" className="mb-1">
-                  Трепалин Александр
+                  {`${user?.name || ""} ${user?.surname || ""}`}
                 </Typography>
               </div>
             </div>
