@@ -1,13 +1,15 @@
 import russianGeo from '../../public/russia.json'
 
 interface Region {
-	"aoguid": string,
-  "name": string,
-  "okato": string
+	aoguid: string
+	name: string
+	okato: string
 }
 
-const getRegions = () => {
+export const getRegions = () => {
 	let regions: Region[] = []
-	russianGeo.data.forEach(district => regions.push(district.areas))
+	russianGeo.data.forEach(district => {
+		district.areas.forEach(area => regions.push(area))
+	})
 	return regions
 }

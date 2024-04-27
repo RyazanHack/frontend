@@ -3,33 +3,32 @@ import { LINK_DISCORD, LINK_GITHUB } from '../../../config'
 import RoutePaths from '../../../router/Routes'
 import Icon from '../Icon/Icon'
 import Link from '../Link/Link'
+import { useNavigate } from 'react-router-dom'
 
 const LINKS = [
 	{
 		href: RoutePaths.VOTING,
-		title: 'Голосование',
-		iconPath: '/icons/UI/link-go.svg',
+		title: 'Голосование'
 	},
 	{
-		href: LINK_GITHUB,
-		title: 'Visit our Github',
-		iconPath: '/icons/UI/link-go.svg',
-	},
-	{
-		href: LINK_DISCORD,
-		title: 'Join our community',
-		iconPath: '/icons/UI/link-go.svg',
-	},
+		href: RoutePaths.PROFILE,
+		title: 'Личный кабинет'
+	}
 ]
 
 const Links: FC = () => {
+  const navigate = useNavigate()
+
 	return (
 		<div className='flex flex-row'>
 			{LINKS.map((link, index) => {
 				return (
-					<Link key={index} href={link.href} className='flex flex-row mx-5'>
+					<Link 
+						key={index} 
+						className='flex flex-row mx-5'
+            onClick={() => navigate(link.href)}
+					>
 						<p className='mr-1'>{link.title}</p>
-						<Icon src={link.iconPath} />
 					</Link>
 				)
 			})}

@@ -53,7 +53,7 @@ const PicturePerspective: FC<PicturePerspectiveProps> = ({
 	return (
 		<div ref={containerRef} onMouseMove={handleCursorAnimation}>
 			<div ref={layerRef}>
-				<img className={`${className}`} {...rest} />
+				<img className={`rounded-[50px] ${className}`} {...rest} />
 			</div>
 		</div>
 	)

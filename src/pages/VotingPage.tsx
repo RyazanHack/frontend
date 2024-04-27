@@ -1,31 +1,47 @@
-import { Option, Select, Typography } from '@material-tailwind/react'
-import { useEffect, useState } from 'react'
-import russianGeo from '../../public/russia.json'
+import { Button, Typography } from '@material-tailwind/react'
+import { useCallback, useEffect, useState } from 'react'
+import RegionDescription from '../components/UI/RegionDescription/RegionDescription'
+import RegionsPicker from '../components/UI/RegionsPicker/RegionsPicker'
+import { getRegions } from '../utils/getRegions'
 
 const VotingPage = () => {
-	const [dataGeo, setDataGeo] = useState(russianGeo)
+	const [regions] = useState(getRegions())
+	const [currentRegion, setCurrentRegion] = useState<string>('')
+
+	const getCountVotes = useCallback(() => {
+		console.log(currentRegion)
+		return 12
+	}, [currentRegion])
+
+	const handleUpvote = useCallback(() => {
+		console.log(currentRegion)
+	}, [currentRegion])
 
 	useEffect(() => {
-		
-	}, [])
+		console.log(currentRegion)
+	}, [currentRegion])
 
 	return (
-		<div>
+		<div className='flex flex-col mt-10'>
 			<Typography className='m-5' variant='h1' color='blue-gray'>
 				Регионы для голосования
 			</Typography>
-			<Typography className='m-5' variant='h3' color='gray'>
+			<Typography variant='h3' color='gray'>
 				Окружной этап
 			</Typography>
-			<div className='w-72'>
-				<Select label='Select Version'>
-					<Option>Material Tailwind HTML</Option>
-					<Option>Material Tailwind React</Option>
-					<Option>Material Tailwind Vue</Option>
-					<Option>Material Tailwind Angular</Option>
-					<Option>Material Tailwind Svelte</Option>
-				</Select>
-			</div>
+			<RegionsPicker setExternalRegion={setCurrentRegion} className='m-5 max-w-[24em]'/>
+			{currentRegion && (
+				<>
+					<RegionDescription
+						title={currentRegion}
+						countVotes={getCountVotes()}
+						description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam maxime dolores quae accusamus dolorum blanditiis, sunt velit, corporis molestias tenetur unde deleniti consequatur! Ad beatae qui et in doloremque quae.'
+					/>
+					<Button className='mt-5' onClick={handleUpvote}>
+						Голосовать
+					</Button>
+				</>
+			)}
 		</div>
 	)
 }

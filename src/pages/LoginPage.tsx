@@ -1,14 +1,13 @@
-import Header from '../components/UI/Header/Header'
-import { SimpleRegistrationForm } from '../components/UI/SimpleRegistrationForm/SimpleRegistrationForm'
+import { LoginForm } from '../components/UI/RegistrationForm/LoginForm'
 
-const HomePage = () => {
+const LoginPage = () => {
 	return (
 		<>
 			<div className='flex flex-row justify-center items-center mt-10'>
-				<SimpleRegistrationForm/>
+				<LoginForm/>
 			</div>
 		</>
 	)
 }
 
-export default HomePage
+export default LoginPage
