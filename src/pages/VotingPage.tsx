@@ -22,14 +22,14 @@ const VotingPage = () => {
 	}, [currentRegion])
 
 	return (
-		<div className='m-5'>
-			<Typography variant='h1' color='blue-gray'>
+		<div className='flex flex-col mt-10'>
+			<Typography className='m-5' variant='h1' color='blue-gray'>
 				Регионы для голосования
 			</Typography>
 			<Typography variant='h3' color='gray'>
 				Окружной этап
 			</Typography>
-			<RegionsPicker setExternalRegion={setCurrentRegion} />
+			<RegionsPicker setExternalRegion={setCurrentRegion} className='m-5 max-w-[24em]'/>
 			{currentRegion && (
 				<>
 					<RegionDescription
