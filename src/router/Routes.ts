@@ -1,7 +1,8 @@
 enum RoutePaths {
 	HOME = '/',
 	SIGNUP = '/signup',
-	LOGIN = '/login'
+	LOGIN = '/login',
+	VOTING = '/voting'
 }
 
 export default RoutePaths

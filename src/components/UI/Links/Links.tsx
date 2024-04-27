@@ -1,12 +1,13 @@
 import { FC } from 'react'
-import { LINK_DISCORD, LINK_GITHUB, LINK_MEDIUM } from '../../../config'
+import { LINK_DISCORD, LINK_GITHUB } from '../../../config'
+import RoutePaths from '../../../router/Routes'
 import Icon from '../Icon/Icon'
 import Link from '../Link/Link'
 
 const LINKS = [
 	{
-		href: LINK_MEDIUM,
-		title: 'Read our blog',
+		href: RoutePaths.VOTING,
+		title: 'Голосование',
 		iconPath: '/icons/UI/link-go.svg',
 	},
 	{
