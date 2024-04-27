@@ -11,7 +11,7 @@ const LINKS = [
 		title: 'Голосование'
 	},
 	{
-		href: '/lk',
+		href: RoutePaths.PROFILE,
 		title: 'Личный кабинет'
 	}
 ]

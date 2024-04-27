@@ -2,10 +2,11 @@ import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
 import { getRegions } from '../../../utils/getRegions'
 
 interface RegionsPickerProps {
-	setExternalRegion?: Dispatch<SetStateAction<string>>
+	setExternalRegion?: Dispatch<SetStateAction<string>>,
+	className?: string
 }
 
-const RegionsPicker: FC<RegionsPickerProps> = ({ setExternalRegion }) => {
+const RegionsPicker: FC<RegionsPickerProps> = ({ setExternalRegion, className }) => {
 	const [regions] = useState(getRegions())
 	// const [currentRegion, setCurrentRegion] = useState<string>('')
 	const [searchTerm, setSearchTerm] = useState('')
@@ -32,7 +33,7 @@ const RegionsPicker: FC<RegionsPickerProps> = ({ setExternalRegion }) => {
 	}
 
 	return (
-		<div className='relative'>
+		<div className={`${className} relative`}>
 			<input
 				type='text'
 				placeholder='Поиск по регионам'
