@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import RoutePaths from '../../../router/Routes'
 import Link from '../Link/Link'
 
+interface LinksProps {
+	className?: string
+}
+
 const LINKS = [
 	{
 		href: RoutePaths.VOTING,
@@ -10,15 +14,15 @@ const LINKS = [
 	},
 	{
 		href: RoutePaths.ADMIN_PANEL,
-		title: 'Панель администратора'
-	}
+		title: 'Панель администратора',
+	},
 ]
 
-const Links: FC = () => {
+const Links: FC<LinksProps> = ({ className }) => {
 	const navigate = useNavigate()
 
 	return (
-		<div className='flex flex-row'>
+		<div className={`${className}`}>
 			{LINKS.map((link, index) => {
 				return (
 					<Link
