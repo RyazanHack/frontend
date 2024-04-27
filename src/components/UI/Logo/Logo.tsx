@@ -15,7 +15,7 @@ const Logo: FC = () => {
 				src='/icons/logo/bitracking.svg'
 				alt='Logo'
 			/>
-			<p className='text-xl lg:text-3xl ml-2 font-bold'>Bi Tracking</p>
+			<p className='text-xl lg:text-3xl ml-2 font-bold'>BiTracking</p>
 		</div>
 	)
 }

@@ -6,9 +6,16 @@ import {
 } from '@material-tailwind/react'
 import { useNavigate } from 'react-router-dom';
 import RoutePaths from '../../../router/Routes';
+import UserService, { LoginRequest } from '../../../API/UserService';
+import { useState } from 'react';
 
 export function LoginForm() {
 	const navigate = useNavigate();
+
+	const [data, setData] = useState<LoginRequest>({
+		password: "",
+		phone: ""
+	});
 
 	return (
 		<>
@@ -27,7 +34,10 @@ export function LoginForm() {
             </div>
             <Input
               type="tel"
-
+              onChange={(e) => setData((prev) => ({
+                ...prev,
+                "phone": "+7" + e.target.value
+              }))}
               className='rounded-l-none !border-t-blue-gray-200 focus:!border-t-gray-900'
               labelProps={{
                 className: 'before:content-none after:content-none',
@@ -42,6 +52,10 @@ export function LoginForm() {
 						type='password'
 						size='lg'
 						placeholder='********'
+            onChange={(e) => setData((prev) => ({
+              ...prev,
+              "password": e.target.value
+            }))}
 						className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
 						labelProps={{
 							className: 'before:content-none after:content-none',
@@ -50,7 +64,13 @@ export function LoginForm() {
 
 				</div>
 				
-				<Button className='mt-6' fullWidth>
+				<Button 
+          className='mt-6' 
+          fullWidth
+          onClick={() => {
+            UserService.login(data);
+          }}
+        >
 					Войти
 				</Button>
 				<Typography color='gray' className='mt-4 text-center font-normal'>

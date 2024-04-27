@@ -4,22 +4,9 @@ import {
   Card,
   CardHeader,
   CardBody,
-  IconButton,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
   Avatar,
-  Tooltip,
   Progress,
 } from "@material-tailwind/react";
-
-// import {
-//   statisticsCardsData,
-//   statisticsChartsData,
-//   projectsTableData,
-//   ordersOverviewData,
-// } from "@/data";
 
 import {
 	BanknotesIcon,

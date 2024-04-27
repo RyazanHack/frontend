@@ -14,11 +14,28 @@ import { useState } from 'react';
 import RoutePaths from '../../../router/Routes';
 import { useNavigate } from 'react-router-dom';
 import RegionsPicker from '../RegionsPicker/RegionsPicker';
+import UserService, { SignupRequest } from '../../../API/UserService';
 
 export function RegistrationForm() {
   const navigate = useNavigate();
 
-  const [gender, setGender] = useState<string>("");
+  const [checked, setChecked] = useState<boolean>(false);
+
+  const [data, setData] = useState<SignupRequest>({
+    name: "",
+    surname: "",
+    region: "",
+    gender: 'male',
+    date_of_birth: "",
+    email: "",
+    password: "",
+    phone: ""
+  });
+
+  const genders = {
+    "male": "Мужской",
+    "female": "Женский"
+  }
 
 	return (
 		<>
@@ -37,6 +54,10 @@ export function RegistrationForm() {
 					<Input
 						size='lg'
 						placeholder='Иван'
+            onChange={(e) => setData((prev) => ({
+              ...prev,
+              "name": e.target.value
+            }))}
 						className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
 						labelProps={{
 							className: 'before:content-none after:content-none',
@@ -48,6 +69,10 @@ export function RegistrationForm() {
 					<Input
 						size='lg'
 						placeholder='Иванов'
+            onChange={(e) => setData((prev) => ({
+              ...prev,
+              "surname": e.target.value
+            }))}
 						className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
 						labelProps={{
 							className: 'before:content-none after:content-none',
@@ -56,7 +81,18 @@ export function RegistrationForm() {
           <Typography variant='h6' color='blue-gray' className='-mb-3'>
 						Дата рождения:
 					</Typography>
-          <DatePicker/>
+
+          <DatePicker
+            setExternalDate={(d) => {
+              if(!d)
+                return
+              const datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear()
+              setData((prev) => ({
+                ...prev,
+                "date_of_birth": datestring
+              }))
+            }}
+          />
 
           
           <Typography variant='h6' color='blue-gray' className='-mb-3'>
@@ -70,19 +106,22 @@ export function RegistrationForm() {
                 color="blue-gray"
                 className="flex h-10 items-center gap-2 border border-blue-gray-200 pl-3"
               >
-                {gender}
+                {genders[data.gender]}
               </Button>
             </MenuHandler>
             <MenuList className="max-h-[20rem] max-w-[18rem]">
-              {["Мужской", "Женский"].map((gender, index) => {
+              {["male", "female"].map((gender, index) => {
                 return (
                   <MenuItem
                     key={index}
                     value={gender}
                     className="flex "
-                    onClick={() => setGender(gender)}
+                    onClick={() => setData((prev) => ({
+                      ...prev,
+                      "gender": gender as any
+                    }))}
                   >
-                    <span>{gender}</span>
+                    <span>{genders[gender as "male" | "female"]}</span>
                   </MenuItem>
                 );
               })}
@@ -98,7 +137,10 @@ export function RegistrationForm() {
             </div>
             <Input
               type="tel"
-
+              onChange={(e) => setData((prev) => ({
+                ...prev,
+                "phone": "+7" + e.target.value
+              }))}
               className='rounded-l-none !border-t-blue-gray-200 focus:!border-t-gray-900'
               labelProps={{
                 className: 'before:content-none after:content-none',
@@ -110,19 +152,13 @@ export function RegistrationForm() {
 						Регион:
 					</Typography>
 
-          <RegionsPicker/>
-					{/* <Typography variant='h6' color='blue-gray' className='-mb-3'>
-						Ваша электронная почта:
-					</Typography>
-					<Input
-						size='lg'
-						type='email'
-						placeholder='name@mail.com'
-						className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
-						labelProps={{
-							className: 'before:content-none after:content-none',
-						}}
-					/> */}
+          <RegionsPicker
+            setExternalRegion={(region) => setData((prev) => ({
+              ...prev,
+              "region": region
+            }))}
+          />
+
 					<Typography variant='h6' color='blue-gray' className='-mb-3'>
 						Пароль
 					</Typography>
@@ -130,6 +166,10 @@ export function RegistrationForm() {
 						type='password'
 						size='lg'
 						placeholder='********'
+            onChange={(e) => setData((prev) => ({
+              ...prev,
+              "password": e.target.value
+            }))}
 						className=' !border-t-blue-gray-200 focus:!border-t-gray-900'
 						labelProps={{
 							className: 'before:content-none after:content-none',
@@ -154,7 +194,7 @@ export function RegistrationForm() {
             </svg>
             Используйте не менее 8 символов: одну заглавную, одну строчную и одну цифру.
           </Typography>
-          <Typography variant='h6' color='blue-gray' className='-mb-3'>
+          {/* <Typography variant='h6' color='blue-gray' className='-mb-3'>
 						Повторите пароль
 					</Typography>
 					<Input
@@ -165,9 +205,10 @@ export function RegistrationForm() {
 						labelProps={{
 							className: 'before:content-none after:content-none',
 						}}
-					/>
+					/> */}
 				</div>
 				<Checkbox
+          onChange={(e) => setChecked(e.target.checked)}
 					label={
 						<Typography
 							variant='small'
@@ -189,7 +230,13 @@ export function RegistrationForm() {
 					}
 					containerProps={{ className: '-ml-2.5' }}
 				/>
-				<Button className='mt-6' fullWidth>
+				<Button 
+          className='mt-6' 
+          fullWidth
+          onClick={() => {
+            checked && UserService.signup(data);
+          }}
+        >
 					Зарегистрироваться
 				</Button>
 				<Typography color='gray' className='mt-4 text-center font-normal'>
