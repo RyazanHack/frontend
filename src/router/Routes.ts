@@ -7,6 +7,7 @@ enum RoutePaths {
 	ADMIN_PANEL = '/panel',
 	BILLING_PAGE = '/payment/:key',
 	PATH_PAGE = '/paths'
+	ADD_TRACK = '/track/add'
 }
 
 export default RoutePaths

@@ -13,6 +13,15 @@ import {
 import ProfileInfoCard from '../components/UI/Profile/Profile'
 import { useCallback, useEffect, useState } from "react";
 import UserService, { User } from "../API/UserService";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale";
+
+const convertDate = (str: string) => {
+  var parts = str.split("-");
+  return new Date(parseInt(parts[0], 10),
+                  parseInt(parts[1], 10) - 1,
+                  parseInt(parts[2], 10));
+}
 
 const ProfilePage = () => {
   const [currentIndex, setIndex] = useState<number>(0);
@@ -40,7 +49,7 @@ const ProfilePage = () => {
       details={{
         "Имя": user?.name,
         "Фамилия": user?.surname,
-        "Дата рождения": "16 июнь 2005",
+        "Дата рождения": user ? format(convertDate(user.date_of_birth), "PPP", {locale: ru}) : "",
         "Пол": gender[user?.gender || "default"],
         "Номер телефона": user?.phone,
         "Регион": user?.region
