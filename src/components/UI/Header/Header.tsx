@@ -9,8 +9,10 @@ const Header: FC = () => {
 		<div className='flex flex-row justify-between mt-2 py-5 px-10 items-center border-b border-black/25 border-solid'>
 			<Logo />
 			<Links />
-			<Billing />
-			<Signup />
+			<div className='flex flex-row'>
+				<Billing className='mr-5' />
+				<Signup />
+			</div>
 		</div>
 	)
 }
