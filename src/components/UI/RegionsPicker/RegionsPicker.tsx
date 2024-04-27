@@ -1,8 +1,8 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { getRegions } from '../../../utils/getRegions'
 
 interface RegionsPickerProps {
-	setExternalRegion?: Dispatch<SetStateAction<string>>,
+	setExternalRegion?: (region: string) => void,
 	className?: string
 }
 

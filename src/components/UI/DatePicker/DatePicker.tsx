@@ -10,8 +10,13 @@ import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { ru } from 'date-fns/locale';
 
+interface DatePickerProps {
+	setExternalDate?: (date: Date | undefined) => void,
+}
  
-export const DatePicker: FC = () => {
+export const DatePicker: FC<DatePickerProps> = ({
+  setExternalDate
+}) => {
   const [date, setDate] = React.useState<Date>();
  
   return (
@@ -28,7 +33,10 @@ export const DatePicker: FC = () => {
             locale={ru} 
             mode="single"
             selected={date}
-            onSelect={setDate}
+            onSelect={(date) => {
+              setDate(date)
+              setExternalDate && setExternalDate(date)
+            }}
             showOutsideDays
             className="border-0"
             classNames={{

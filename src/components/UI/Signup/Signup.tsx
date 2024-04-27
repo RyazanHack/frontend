@@ -9,13 +9,26 @@ interface GetWalletProps {
 const Signup: FC<GetWalletProps> = ({ className }) => {
 	const navigate = useNavigate();
 
+	const logined = !!localStorage["token"]
+
 	return (
-		<button
-			className={`btn btn-outline ${className}`}
-			onClick={() => navigate(RoutePaths.SIGNUP)}
-		>
-			Войти
-		</button>
+		<div className='flex gap-10'>
+			<button
+				className={`btn btn-outline ${className}`}
+				onClick={() => logined ? navigate(RoutePaths.PROFILE) : navigate(RoutePaths.LOGIN)}
+			>
+				{logined ? "Личный кабинет" : "Войти"}
+			</button>
+
+			{!logined && 
+				<button
+					className={`btn btn-outline ${className}`}
+					onClick={() => navigate(RoutePaths.SIGNUP)}
+				>
+					{"Регистрация"}
+				</button>
+	    }
+		</div>
 	)
 }
 
