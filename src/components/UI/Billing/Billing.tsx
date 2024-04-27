@@ -7,26 +7,40 @@ import {
 	Input,
 	Typography,
 } from '@material-tailwind/react'
-import { FC, useCallback, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
+import UserService, { User } from '../../../API/UserService'
+import BillingService from '../../../API/BillingService'
 
 interface BillingProps {
 	className?: string
 }
 
 export const Billing: FC<BillingProps> = ({ className }) => {
+	const [user, setUser] = useState<User>()
+
+	const getUser = useCallback(async () => {
+		const user = await UserService.info();
+		setUser(user);
+	}, []);
+
+	useEffect(() => {
+		getUser()
+	}, [])
+
 	const [open, setOpen] = useState(false)
 	const [countVotes, setCountVotes] = useState<number>(0)
 
 	const handleOpen = () => setOpen(!open)
 
-	const handleCreatePayment = useCallback(() => {
-		console.log(countVotes)
+	const handleCreatePayment = useCallback(async () => {
+    const url = await BillingService.buy(countVotes);
+    window.location.href = url;
 	}, [countVotes])
 
 	return (
 		<>
 			<Button className={`btn btn-outline ${className}`} onClick={handleOpen}>
-				Купить голоса
+				Купить голоса &nbsp; <span className='text-red-500 text-lg'>{user?.unused_votes}</span>
 			</Button>
 			<Dialog open={open} handler={handleOpen}>
 				<DialogHeader>Покупка голосов</DialogHeader>
