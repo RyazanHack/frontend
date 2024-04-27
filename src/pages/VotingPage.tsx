@@ -1,10 +1,12 @@
 import { Option, Select, Typography } from '@material-tailwind/react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import russianGeo from '../../public/russia.json'
 
 const VotingPage = () => {
+	const [dataGeo, setDataGeo] = useState(russianGeo)
+
 	useEffect(() => {
-		console.log(russianGeo)
+		
 	}, [])
 
 	return (
