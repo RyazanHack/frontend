@@ -8,15 +8,20 @@ interface CreatePaymentRequest {
 export default class BillingService {
 	private static API = MAIN_API
 
-	public static async create(token: string, countVotes: number) {
+	public static async buy(countVotes: number) {
+    const token = localStorage["token"];
+
+		let config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'content-type': 'application/json',
+			},
+		}
+
 		const requestData: CreatePaymentRequest = {
 			countVotes,
 		}
-		const response = await axios.post(this.API + '/upvote', requestData, {
-			headers: {
-				token: token,
-			},
-		})
+		const response = await axios.post(this.API + `/payment/payment/${countVotes}`, requestData, config)
 		return response.data
 	}
 }

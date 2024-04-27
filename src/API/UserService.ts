@@ -24,7 +24,8 @@ export interface User {
   gender: "male" | "female",
   date_of_birth: string,
   email: string,
-  region: string
+  region: string,
+  unused_votes: number
 }
 
 export default class UserService {
