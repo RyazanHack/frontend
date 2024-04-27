@@ -1,12 +1,11 @@
-import Content from './components/UI/Content/Content'
-import Header from './components/UI/Header/Header'
+import { BrowserRouter } from 'react-router-dom'
+import AppRouter from './router/Pages'
 
 const App = () => {
 	return (
-		<>
-			<Header />
-			<Content />
-		</>
+		<BrowserRouter>
+			<AppRouter />
+		</BrowserRouter>
 	)
 }
 

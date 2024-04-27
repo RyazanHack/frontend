@@ -5,15 +5,15 @@ interface GetWalletProps {
 	className?: string
 }
 
-const GetWallet: FC<GetWalletProps> = ({ className }) => {
+const Login: FC<GetWalletProps> = ({ className }) => {
 	return (
 		<button
 			className={`btn btn-outline ${className}`}
 			onClick={() => window.open(WALLET)}
 		>
-			Get Wallet
+			Войти
 		</button>
 	)
 }
 
-export default GetWallet
+export default Login

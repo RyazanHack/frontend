@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import GetWallet from '../GetWallet/GetWallet'
+import GetWallet from '../Login/Login'
 import Links from '../Links/Links'
 import Logo from '../Logo/Logo'
 

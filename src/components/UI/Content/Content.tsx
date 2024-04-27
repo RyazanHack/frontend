@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import GetWallet from '../GetWallet/GetWallet'
+import GetWallet from '../Login/Login'
 import PicturePerspective from '../PicturePerspective/PicturePerspective'
 
 const Content: FC = () => {
