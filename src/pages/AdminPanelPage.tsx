@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Typography,
   Card,
@@ -15,6 +15,9 @@ import {
 	UsersIcon,
   } from "@heroicons/react/24/solid";
 import StatisticsCard from "../components/UI/StatisticsCard/StatisticsCard";
+import StagesService from "../API/StagesService";
+import { useNavigate } from "react-router-dom";
+import RoutePaths from "../router/Routes";
 
 const statisticsCardsData = [
 	{
@@ -28,34 +31,39 @@ const statisticsCardsData = [
 	  icon: UsersIcon,
 	  title: "Зарегестрированные пользователи",
 	  value: "2,300",
-	},
-	{
-	  color: "gray",
-	  icon: ClockIcon,
-	  title: "До завершения голосования",
-	  value: "2 часа 15 минут"
-	},
+	}
 ];
 
-const projectsTableData = [
-  {
-    img: "/img/ryazan.svg",
-    name: "Рязанская область",
-    votes: 6075,
-    percent: 10,
-  }
-];
+const projectsTableData: any = [];
 
 const AdminPanelPage = () => {
+  const navigate = useNavigate();
+
+  const [stage, setStage] = useState<1 | 2>(1);
+
+  const getStage = useCallback(async () => {
+    const stage = await StagesService.get_stage();
+    setStage(stage);
+  }, [])
+
+  useEffect(() => {
+    getStage()
+  }, [])
+
 	return (
 		<div className="mt-3 m-5">
       <div className="grid grid-cols-2 gap-6 max-w-[50em]">
         <Button className='mt-6'>
 					Завершить голосование
 				</Button>
-        <Button className='mt-6'>
-					Объявить победителей
+        {stage === 1 &&
+        <Button 
+          className='mt-6'
+          onClick={() => navigate(RoutePaths.ADD_TRACK)}
+        >
+					Добавить трек
 				</Button>
+        }
       </div>
       <div className="grid gap-y-10 mt-3 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         {statisticsCardsData.map(({ icon, title, ...rest }) => (
