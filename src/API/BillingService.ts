@@ -21,7 +21,12 @@ export default class BillingService {
 		const requestData: CreatePaymentRequest = {
 			countVotes,
 		}
-		const response = await axios.post(this.API + `/payment/payment/${countVotes}`, requestData, config)
+		const response = await axios.post(this.API + `/payment/vote/${countVotes}`, requestData, config)
 		return response.data
+	}
+
+  public static async is_confirmed(key: string) {
+		const response = await axios.get(this.API + `/payment/is_confirmed/${key}`)
+		return response.data["is_confirmed"]
 	}
 }
