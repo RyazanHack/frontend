@@ -10,13 +10,15 @@ const AppRouter = () => {
 		SignupPage,
 		LoginPage,
 		VotingPage,
-		ProfilePage
+		ProfilePage,
+		AdminPanelPage
 	] = multiLazy([
 		() => import('../pages/HomePage'),
 		() => import('../pages/SignupPage'),
 		() => import('../pages/LoginPage'),
 		() => import('../pages/VotingPage'),
 		() => import('../pages/ProfilePage'),
+		() => import('../pages/AdminPanelPage'),
 	])
 
 	return (
@@ -28,11 +30,12 @@ const AppRouter = () => {
             <Outlet/>
           </>
         }>
-          <Route path={RoutePaths.HOME} element={<HomePage />} />
-          <Route path={RoutePaths.SIGNUP} element={<SignupPage />} />
-		      <Route path={RoutePaths.VOTING} element={<VotingPage />} />
-          <Route path={RoutePaths.LOGIN} element={<LoginPage />} />
-          <Route path={RoutePaths.PROFILE} element={<ProfilePage />} />
+          	<Route path={RoutePaths.HOME} element={<HomePage />} />
+          	<Route path={RoutePaths.SIGNUP} element={<SignupPage />} />
+			      <Route path={RoutePaths.VOTING} element={<VotingPage />} />
+          	<Route path={RoutePaths.LOGIN} element={<LoginPage />} />
+          	<Route path={RoutePaths.PROFILE} element={<ProfilePage />} />
+          	<Route path={RoutePaths.ADMIN_PANEL} element={<AdminPanelPage />} />
         </Route>
 			</Routes>
 		</Suspense>

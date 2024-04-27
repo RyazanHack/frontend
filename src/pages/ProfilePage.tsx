@@ -8,11 +8,31 @@ import {
   } from "@material-tailwind/react";
 import {
   HomeIcon,
-  Cog6ToothIcon,
+  TrophyIcon,
 } from "@heroicons/react/24/solid";
 import ProfileInfoCard from '../components/UI/Profile/Profile'
+import { useState } from "react";
 
 const ProfilePage = () => {
+  const [currentIndex, setIndex] = useState<number>(0);
+
+  const components = [
+    <ProfileInfoCard
+      title="Информация о пользователе"
+      details={{
+        "Имя": "Трепалин",
+        "Фамилия": "Александр",
+        "Дата рождения": "16 июнь 2005",
+        "Пол": "мужской",
+        "Номер телефона": "+7 800 555 35 35",
+        "Регион": "Рязанская область"
+      }}
+    />,
+    <div>
+      Достижения
+    </div>
+  ]
+
 	return (
 		<>
 		<Card className="mx-3 mt-10 mb-6 lg:mx-4 border border-blue-gray-100">
@@ -28,31 +48,33 @@ const ProfilePage = () => {
             <div className="w-96">
               <Tabs value="app">
                 <TabsHeader>
-                  <Tab value="app">
+                  <Tab 
+                    value="app"
+                    onClick={() => setIndex(0)}
+                  >
                     <HomeIcon className="-mt-1 mr-2 inline-block h-5 w-5" />
                     Профиль
                   </Tab>
-                  <Tab value="settings">
-                    <Cog6ToothIcon className="-mt-1 mr-2 inline-block h-5 w-5" />
-                    Настройки
+                  <Tab 
+                    value="settings"
+                    onClick={() => setIndex(1)}
+                  >
+                    <TrophyIcon className="-mt-1 mr-2 inline-block h-5 w-5" />
+                    Достижения
                   </Tab>
                 </TabsHeader>
               </Tabs>
             </div>
           </div>
-          <div className="gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3">
-            <ProfileInfoCard
-              title="Информация о пользователе"
-              details={{
-                "Имя": "Трепалин",
-                "Фамилия": "Александр",
-                "Дата рождения": "16 июнь 2005",
-                "Пол": "мужской",
-                "Номер телефона": "+7 800 555 35 35",
-                "Регион": "Рязанская область"
-              }}
-            />
-          </div>
+          {
+            components.map((component, index) => {
+              return <div 
+                className={`gird-cols-1 mb-12 grid gap-12 px-4 lg:grid-cols-2 xl:grid-cols-3 ${index !== currentIndex && "hidden"}`}
+              >
+                {component}
+              </div>
+            })
+          }
         </CardBody>
       </Card>
 		</>
