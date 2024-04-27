@@ -32,7 +32,9 @@ export default class VotingService {
 		return response.data
 	}
 
-	public static async upvote(token: string, region: string, stage: 1 | 2) {
+	public static async upvote(region: string, stage: 1 | 2) {
+		const token = localStorage["token"];
+
 		let config = {
 			headers: {
 				Authorization: `Bearer ${token}`,
