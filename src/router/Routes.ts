@@ -3,7 +3,8 @@ enum RoutePaths {
 	SIGNUP = '/signup',
 	LOGIN = '/login',
 	VOTING = '/voting',
-	PROFILE = '/profile'
+	PROFILE = '/profile',
+	ADMIN_PANEL = '/panel'
 }
 
 export default RoutePaths

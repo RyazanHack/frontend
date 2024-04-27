@@ -26,12 +26,12 @@ const VotingPage = () => {
 			<Typography className='m-5' variant='h1' color='blue-gray'>
 				Регионы для голосования
 			</Typography>
-			<Typography variant='h3' color='gray'>
+			<Typography className='ml-5' variant='h3' color='gray'>
 				Окружной этап
 			</Typography>
 			<RegionsPicker setExternalRegion={setCurrentRegion} className='m-5 max-w-[24em]'/>
 			{currentRegion && (
-				<>
+				<div className='m-5'>
 					<RegionDescription
 						title={currentRegion}
 						countVotes={getCountVotes()}
@@ -40,7 +40,7 @@ const VotingPage = () => {
 					<Button className='mt-5' onClick={handleUpvote}>
 						Голосовать
 					</Button>
-				</>
+				</div>
 			)}
 		</div>
 	)
