@@ -42,4 +42,22 @@ export default class TracksService {
 		const response = await axios.get(this.API + `/routes?route_id=${id}`)
 		return response.data
 	}
+
+	public static async travelComplete(routeId: number, photoFile: any) {
+		const formData = new FormData()
+		formData.append('photo', photoFile)
+		const token = localStorage['token']
+
+		let config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'content-type': 'multipart/form-data',
+			},
+		}
+		await axios.post(
+			this.API + `/travel/complete?route_id=${routeId}`,
+			formData,
+			config
+		)
+	}
 }
