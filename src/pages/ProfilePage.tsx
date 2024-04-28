@@ -28,6 +28,10 @@ const ProfilePage = () => {
 
   const [user, setUser] = useState<User>()
 
+  const getAchievements = useCallback(async () => {
+
+  }, [])
+
   const getUser = useCallback(async () => {
     const user = await UserService.info();
     setUser(user);
