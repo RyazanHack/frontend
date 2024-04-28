@@ -59,4 +59,16 @@ export default class UserService {
 
 		localStorage['token'] = token
 	}
+
+	public static async getCountTravels() {
+		const token = localStorage['token']
+		let config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'content-type': 'application/json',
+			},
+		}
+		const response = await axios.get(this.API + `/travel`, config)
+		return response?.data?.length || 0
+	}
 }
