@@ -26,6 +26,7 @@ export interface User {
 	email: string
 	region: string
 	unused_votes: number
+	role: string
 }
 
 export default class UserService {
