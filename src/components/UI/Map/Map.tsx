@@ -25,7 +25,11 @@ const YMap: FC<MapProps> = ({
   readOnly,
   onChange
 }) => {
-  const [coordinates, setCoordinates] = useState<number[][]>(coords || [])
+  const [coordinates, setCoordinates] = useState<number[][]>([])
+
+  useEffect(() => {
+    setCoordinates(coords || [])
+  }, [coords])
 
   const [centerCoords, setCenter] = useState<number[]>([0, 0])
 

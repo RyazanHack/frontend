@@ -15,7 +15,8 @@ const AppRouter = () => {
 		AdminPanelPage,
 		BillingPage,
 		PathPage,
-		AddTrackPage
+		AddTrackPage,
+		TrackPage
 	] = multiLazy([
 		() => import('../pages/HomePage'),
 		() => import('../pages/SignupPage'),
@@ -26,6 +27,7 @@ const AppRouter = () => {
 		() => import('../pages/BillingPage'),
 		() => import('../pages/PathPage'),
 		() => import('../pages/AddTrackPage'),
+		() => import('../pages/TrackPage'),
 	])
 
 	return (
@@ -50,6 +52,7 @@ const AppRouter = () => {
 					<Route path={RoutePaths.BILLING_PAGE} element={<BillingPage />} />
 					<Route path={RoutePaths.PATH_PAGE} element={<PathPage />} />
 					<Route path={RoutePaths.ADD_TRACK} element={<AddTrackPage />} />
+					<Route path={RoutePaths.PATH} element={<TrackPage/>} />
 				</Route>
 			</Routes>
 		</Suspense>

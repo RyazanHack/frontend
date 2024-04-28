@@ -7,21 +7,25 @@ import {
 	Typography,
 } from '@material-tailwind/react'
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface PathCardProps {
 	pathImage: string
 	title: string
 	description: string
+	path: string
 }
 
 export const PathCard: FC<PathCardProps> = ({
 	pathImage,
 	title,
 	description,
+	path
 }) => {
+	const navigate = useNavigate()
 	return (
 		<Card className='mt-6 w-96'>
-			<CardHeader color='blue-gray' className='relative h-56'>
+			<CardHeader color='blue-gray' className='relative'>
 				<img src={pathImage} alt='card-image' />
 			</CardHeader>
 			<CardBody>
@@ -31,7 +35,7 @@ export const PathCard: FC<PathCardProps> = ({
 				<Typography>{description}</Typography>
 			</CardBody>
 			<CardFooter className='pt-0'>
-				<Button>TRACK!</Button>
+				<Button onClick={() => navigate(path)}>TRACK!</Button>
 			</CardFooter>
 		</Card>
 	)
