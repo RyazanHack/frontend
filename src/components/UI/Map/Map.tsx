@@ -36,6 +36,10 @@ const YMap: FC<MapProps> = ({
 	  zoom: 8
 	}), [centerCoords]);
 
+  useEffect(() => {
+    setLoaded(false)
+  }, [center])
+
   const PositionedMap: React.FC<YmapsProps> = memo(({ ymaps }) => {
     if(!loaded) {
       ymaps.geocode(center).then((result: any) => {
