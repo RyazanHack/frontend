@@ -34,6 +34,7 @@ export const Billing: FC<BillingProps> = ({ className }) => {
 
 	const handleCreatePayment = useCallback(async () => {
     const url = await BillingService.buy(countVotes);
+	console.log(url)
     window.location.href = url;
 	}, [countVotes])
 
