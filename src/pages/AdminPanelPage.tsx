@@ -18,23 +18,15 @@ import StatisticsCard from "../components/UI/StatisticsCard/StatisticsCard";
 import StagesService from "../API/StagesService";
 import { useNavigate } from "react-router-dom";
 import RoutePaths from "../router/Routes";
+import AdminService, { RegionStat } from "../API/AdminService";
+import { getCrest } from "../utils/getRegions";
+import axios from "axios";
+import { MAIN_API } from "../config";
 
-const statisticsCardsData = [
-	{
-	  color: "gray",
-	  icon: BanknotesIcon,
-	  title: "Купленные голоса",
-	  value: "36178",
-	},
-	{
-	  color: "gray",
-	  icon: UsersIcon,
-	  title: "Зарегестрированные пользователи",
-	  value: "2,300",
-	}
-];
-
-const projectsTableData: any = [];
+interface Stats {
+  users: number,
+  purchased: number
+}
 
 const AdminPanelPage = () => {
   const navigate = useNavigate();
@@ -50,13 +42,58 @@ const AdminPanelPage = () => {
     getStage()
   }, [])
 
+  const [stats, setStats] = useState<Stats>()
+  
+  const [projectsTableData, setRegionsData] = useState<(RegionStat & {
+    img: string
+  })[]>([]);
+
+  const getData = useCallback(async () => {
+    const stats = await AdminService.getStats();
+
+    setStats(stats)
+    
+    const regions = await AdminService.getRegions(stage);
+
+    setRegionsData(regions.map(region => {
+      return {
+        ...region,
+        img: getCrest(region.name)
+      }
+    }))
+  }, [])
+
+  const statisticsCardsData = [
+    {
+      color: "gray",
+      icon: BanknotesIcon,
+      title: "Купленные голоса",
+      value: stats?.purchased,
+    },
+    {
+      color: "gray",
+      icon: UsersIcon,
+      title: "Зарегестрированные пользователи",
+      value: stats?.users,
+    }
+  ];
+
+  useEffect(() => {
+    getData()
+  }, [])
+
 	return (
 		<div className="mt-3 m-5">
-      <div className="grid grid-cols-2 gap-6 max-w-[50em]">
-        <Button className='mt-6'>
+      <div className="grid grid-cols-3 gap-6 max-w-[75em]">
+        <Button 
+          className='mt-6'
+          onClick={() => {
+            AdminService.nextStage(stage)
+          }}
+        >
 					Завершить голосование
 				</Button>
-        {stage === 1 &&
+        {stage === 2 &&
         <Button 
           className='mt-6'
           onClick={() => navigate(RoutePaths.ADD_TRACK)}
@@ -64,6 +101,29 @@ const AdminPanelPage = () => {
 					Добавить трек
 				</Button>
         }
+        <Button 
+          className='mt-6'
+          onClick={() => {
+            axios({
+                url: MAIN_API + '/statistic/xlsx',
+                method: 'GET',
+                responseType: 'blob', 
+            }).then((response) => {
+                const href = URL.createObjectURL(response.data);
+            
+                const link = document.createElement('a');
+                link.href = href;
+                link.setAttribute('download', 'отчёт.xlsx');
+                document.body.appendChild(link);
+                link.click();
+            
+                document.body.removeChild(link);
+                URL.revokeObjectURL(href);
+            });
+          }}
+        >
+					Выгрузить отчёт
+				</Button>
       </div>
       <div className="grid gap-y-10 mt-3 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
         {statisticsCardsData.map(({ icon, title, ...rest }) => (

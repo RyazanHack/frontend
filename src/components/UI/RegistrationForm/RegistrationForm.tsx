@@ -222,6 +222,7 @@ export function RegistrationForm() {
                 <span
                   className='font-medium transition-colors text-tg-accent hover:text-gray-900'
                   onClick={(e) => {
+                    window.open("/eula.pdf", "_blank")
                     e.preventDefault()
                   }}
                 >

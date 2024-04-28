@@ -40,7 +40,7 @@ const Links: FC<LinksProps> = ({ className }) => {
 		{
 			href: RoutePaths.PATH_PAGE,
 			title: '✅ Маршруты',
-			disabled: stage == 1,
+			disabled: stage === 1,
 		},
 		{
 			href: RoutePaths.ADMIN_PANEL,
