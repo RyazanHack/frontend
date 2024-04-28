@@ -49,6 +49,8 @@ const AdminPanelPage = () => {
   })[]>([]);
 
   const getData = useCallback(async () => {
+    getStage()
+    
     const stats = await AdminService.getStats();
 
     setStats(stats)
@@ -81,6 +83,14 @@ const AdminPanelPage = () => {
   useEffect(() => {
     getData()
   }, [])
+
+  useEffect(() => {
+		const interval = setInterval(() => {
+			getData()
+		}, 5000) // 5000 миллисекунд = 5 секунд
+
+		return () => clearInterval(interval) // Очистка интервала при размонтировании компонента
+	}, [getData])
 
 	return (
 		<div className="mt-3 m-5">
