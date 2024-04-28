@@ -118,7 +118,6 @@ const VotingPage = () => {
 						<RegionDescription
 							title={currentRegion}
 							countVotes={currentCountVotes}
-							description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam maxime dolores quae accusamus dolorum blanditiis, sunt velit, corporis molestias tenetur unde deleniti consequatur! Ad beatae qui et in doloremque quae.'
 						/>
 						{
 							stage !== 3 &&
