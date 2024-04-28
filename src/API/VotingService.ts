@@ -3,18 +3,18 @@ import { MAIN_API } from '../config'
 
 interface GetCountVotesRequest {
 	region: string
-	stage: 1 | 2
+	stage: 1 | 2 | 3
 }
 
 interface UpvoteRequest {
 	region: string
-	stage: 1 | 2
+	stage: 1 | 2 | 3
 	amount: number
 }
 
 interface GetCountVotesResponse {
 	region: string
-	stage: 1 | 2
+	stage: 1 | 2 | 3
 	votes: number
 }
 
@@ -23,7 +23,7 @@ export default class VotingService {
 
 	public static async getCountVotes(
 		region: string,
-		stage: 1 | 2
+		stage: 1 | 2 | 3
 	): Promise<GetCountVotesResponse> {
 		const requestData: GetCountVotesRequest = {
 			region,
@@ -33,7 +33,7 @@ export default class VotingService {
 		return response.data
 	}
 
-	public static async upvote(region: string, stage: 1 | 2, amount: number) {
+	public static async upvote(region: string, stage: 1 | 2 | 3, amount: number) {
 		const token = localStorage['token']
 		let config = {
 			headers: {

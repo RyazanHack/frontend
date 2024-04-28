@@ -39,7 +39,7 @@ const projectsTableData: any = [];
 const AdminPanelPage = () => {
   const navigate = useNavigate();
 
-  const [stage, setStage] = useState<1 | 2>(1);
+  const [stage, setStage] = useState<1 | 2 | 3>(1);
 
   const getStage = useCallback(async () => {
     const stage = await StagesService.get_stage();
