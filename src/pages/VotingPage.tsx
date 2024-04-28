@@ -12,20 +12,31 @@ import StagesService from '../API/StagesService'
 import VotingService from '../API/VotingService'
 import RegionDescription from '../components/UI/RegionDescription/RegionDescription'
 import RegionsPicker from '../components/UI/RegionsPicker/RegionsPicker'
-import { getRegions } from '../utils/getRegions'
+import RegionsService, { Region } from '../API/RegionsService'
+
 
 const VotingPage = () => {
-	const [regions] = useState(getRegions())
 	const [currentRegion, setCurrentRegion] = useState<string>('')
 	const [currentCountVotes, setCurrentCountVotes] = useState<number>(0)
 
+	const [regs, setRegs] = useState<Region[]>();
+
 	// Stage
 
-	const [stage, setStage] = useState<1 | 2>(1)
+	const [stage, setStage] = useState<1 | 2 | 3>(1)
 
 	const getStage = useCallback(async () => {
 		const stage = await StagesService.get_stage()
 		setStage(stage)
+
+		if(stage == 2) {
+			const regions = await RegionsService.get_stage_1();
+			setRegs(regions);
+		}
+		else if(stage == 3) {
+			const regions = await RegionsService.get_stage_2();
+			setRegs(regions);
+		}
 	}, [])
 
 	useEffect(() => {
@@ -47,9 +58,9 @@ const VotingPage = () => {
 		getCountVotes()
 	}, [currentRegion])
 
-	const handleUpvote = useCallback(() => {
+	const handleUpvote = useCallback(async () => {
 		// TODO: Change to localstorage
-		VotingService.upvote(currentRegion, stage, countVotes)
+		await VotingService.upvote(currentRegion, stage, countVotes)
 	}, [currentRegion, countVotes, stage])
 
 	useEffect(() => {
@@ -100,6 +111,7 @@ const VotingPage = () => {
 				<RegionsPicker
 					setExternalRegion={setCurrentRegion}
 					className='m-5 max-w-[24em]'
+					regions={regs}
 				/>
 				{currentRegion && (
 					<div className='m-5'>
@@ -108,9 +120,12 @@ const VotingPage = () => {
 							countVotes={currentCountVotes}
 							description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam maxime dolores quae accusamus dolorum blanditiis, sunt velit, corporis molestias tenetur unde deleniti consequatur! Ad beatae qui et in doloremque quae.'
 						/>
-						<Button className='mt-5' onClick={handleOpen}>
-							Голосовать
-						</Button>
+						{
+							stage !== 3 &&
+							<Button className='mt-5' onClick={handleOpen}>
+								Голосовать
+							</Button>
+						}
 					</div>
 				)}
 			</div>

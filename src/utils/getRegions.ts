@@ -1,6 +1,6 @@
 import russianGeo from '../../public/russia.json'
 
-interface Region {
+export interface Region {
 	name: string
 	capital: string,
 	crest: string

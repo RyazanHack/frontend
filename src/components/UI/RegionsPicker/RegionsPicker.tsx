@@ -1,16 +1,24 @@
 import { FC, useEffect, useState } from 'react'
 import { getRegions } from '../../../utils/getRegions'
+import { Region } from '../../../API/RegionsService'
+
 
 interface RegionsPickerProps {
 	setExternalRegion?: (region: string) => void,
-	className?: string
+	className?: string,
+	regions?: Region[]
 }
 
-const RegionsPicker: FC<RegionsPickerProps> = ({ setExternalRegion, className }) => {
-	const [regions] = useState(getRegions())
+const RegionsPicker: FC<RegionsPickerProps> = ({ setExternalRegion, className, regions: regs }) => {
+	const [regions, setRegions] = useState(getRegions())
 	// const [currentRegion, setCurrentRegion] = useState<string>('')
 	const [searchTerm, setSearchTerm] = useState('')
 	const [showOptions, setShowOptions] = useState(false)
+
+	useEffect(() => {
+		if(regs)
+			setRegions(regs as any)
+	}, [regs])
 
 	useEffect(() => {
 		console.log(regions)
