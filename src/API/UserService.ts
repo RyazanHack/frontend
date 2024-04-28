@@ -2,30 +2,30 @@ import axios from 'axios'
 import { MAIN_API } from '../config'
 
 export interface SignupRequest {
-	name: string,
-  surname: string,
-  phone: string,
-  gender: "male" | "female",
-  date_of_birth: string,
-  email: string,
-  password: string,
-  region: string
+	name: string
+	surname: string
+	phone: string
+	gender: 'male' | 'female'
+	date_of_birth: string
+	email: string
+	password: string
+	region: string
 }
 
 export interface LoginRequest {
-  phone: string,
-  password: string,
+	phone: string
+	password: string
 }
 
 export interface User {
-  name: string,
-  surname: string,
-  phone: string,
-  gender: "male" | "female",
-  date_of_birth: string,
-  email: string,
-  region: string,
-  unused_votes: number
+	name: string
+	surname: string
+	phone: string
+	gender: 'male' | 'female'
+	date_of_birth: string
+	email: string
+	region: string
+	unused_votes: number
 }
 
 export default class UserService {
@@ -33,30 +33,30 @@ export default class UserService {
 
 	public static async signup(user: SignupRequest): Promise<void> {
 		const response = await axios.post(this.API + '/user/register', user)
-		const token = response.data.access_token;
+		const token = response.data.access_token
 
-    localStorage["token"] = token;
+		localStorage['token'] = token
 	}
 
-  public static async info(): Promise<User> {
-    const token = localStorage["token"];
+	public static async info(): Promise<User> {
+		const token = localStorage['token']
 
-    let config = {
-      headers: {
-       Authorization: `Bearer ${token}`,
-       'content-type': 'application/json',
-      },
-     }
-   
-     const response = await axios.post(this.API + '/user/self', {}, config)
+		let config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'content-type': 'application/json',
+			},
+		}
 
-     return response.data
-  }
+		const response = await axios.post(this.API + '/user/self', {}, config)
 
-  public static async login(user: LoginRequest): Promise<void> {
+		return response.data
+	}
+
+	public static async login(user: LoginRequest): Promise<void> {
 		const response = await axios.post(this.API + '/user/token', user)
-		const token = response.data.access_token;
+		const token = response.data.access_token
 
-    localStorage["token"] = token;
+		localStorage['token'] = token
 	}
 }
