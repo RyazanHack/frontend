@@ -22,7 +22,7 @@ const AddTrackPage = () => {
 					})}
 				/>
 				
-				<Button 
+				<Button
 					className='mt-6 max-w-[24em]' 
 					fullWidth
 					onClick={() => {

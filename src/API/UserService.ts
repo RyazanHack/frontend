@@ -26,6 +26,7 @@ export interface User {
 	email: string
 	region: string
 	unused_votes: number
+	role: string
 }
 
 export default class UserService {
@@ -58,5 +59,17 @@ export default class UserService {
 		const token = response.data.access_token
 
 		localStorage['token'] = token
+	}
+
+	public static async getCountTravels() {
+		const token = localStorage['token']
+		let config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'content-type': 'application/json',
+			},
+		}
+		const response = await axios.get(this.API + `/travel`, config)
+		return response?.data?.length || 0
 	}
 }
