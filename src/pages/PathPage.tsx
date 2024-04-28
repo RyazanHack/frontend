@@ -1,27 +1,25 @@
 import { Typography } from '@material-tailwind/react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { PathCard } from '../components/UI/PathCard/PathCard'
-
-interface Path {
-	pathImage: string
-	title: string
-	description: string
-}
+import TracksService, { Track } from '../API/TracksService'
+import { generatePath } from 'react-router-dom'
+import RoutePaths from '../router/Routes'
+import { getCrest } from '../utils/getRegions'
 
 const PathPage = () => {
-	const [paths, setPaths] = useState<Path[]>()
+	const [paths, setPaths] = useState<(Track & {
+		id: string
+	})[]>()
+
+
+	const getPaths = useCallback(async () => {
+		const paths = await TracksService.get_all()
+
+		setPaths(paths)
+	}, [])
 
 	useEffect(() => {
-		const objs = []
-		for (let i = 0; i < 10; i++) {
-			objs.push({
-				pathImage: '/assets/ryazan-path-1.jpeg',
-				title: 'Маршрут Река Ока',
-				description:
-					'Это место находится недалеко от пляжа реки Оки и автобусной остановки всего в 2 минутах ходьбы. Где вы можете насладиться красотами Рязанской Области',
-			})
-		}
-		setPaths(objs)
+		getPaths()
 	}, [])
 
 	return (
@@ -34,9 +32,12 @@ const PathPage = () => {
 					return (
 						<div key={index} className='flex justify-center'>
 							<PathCard
-								pathImage={path.pathImage}
+								pathImage={getCrest(path.region)}
 								title={path.title}
-								description={path.description}
+								description={path.region}
+								path={generatePath(RoutePaths.PATH, {
+									id: path.id
+								})}
 							/>
 						</div>
 					)

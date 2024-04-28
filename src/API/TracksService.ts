@@ -7,6 +7,12 @@ export interface Track {
 	points: string
 }
 
+export interface TrackResp {
+	title: string
+	region: string
+	points: number[][]
+}
+
 export default class TracksService {
 	private static API = MAIN_API
 
@@ -21,5 +27,17 @@ export default class TracksService {
 		}
 
 		await axios.post(this.API + `/routes/add`, track, config)
+	}
+
+	public static async get_all(): Promise<(Track & {
+		id: string
+	})[]> {
+		const response = await axios.get(this.API + `/routes/all`)
+		return response.data
+	}
+
+	public static async get_one(id: number): Promise<TrackResp> {
+		const response = await axios.get(this.API + `/routes?route_id=${id}`)
+		return response.data
 	}
 }

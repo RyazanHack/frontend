@@ -1,6 +1,6 @@
 import russianGeo from '../../public/russia.json'
 
-interface Region {
+export interface Region {
 	name: string
 	capital: string,
 	crest: string
@@ -16,5 +16,13 @@ export const getRegions = () => {
 }
 
 export const getCapital = (region: string) => {
-	return regions.filter(reg => reg.name === region)[0].capital
+	return (regions.filter(reg => reg.name === region)[0] || [{
+		capital: ""
+	}]).capital
+}
+
+export const getCrest = (region: string) => {
+	return (regions.filter(reg => reg.name === region)[0] || [{
+		crest: ""
+	}]).crest
 }

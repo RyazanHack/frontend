@@ -1,17 +1,31 @@
 import { Typography } from '@material-tailwind/react'
-import { FC } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
+import { TypeAnimation } from 'react-type-animation'
+import YaGPTService from '../../../API/YaGPTService'
 
 interface RegionDescriptionProps {
 	countVotes: number
-	description: string
 	title: string
 }
 
 const RegionDescription: FC<RegionDescriptionProps> = ({
 	countVotes,
-	description,
 	title,
 }) => {
+	const [description, setDescription] = useState<string>("")
+
+	const getDescription = useCallback(async () => {
+		setDescription("Загрузка...")
+
+		const description = await YaGPTService.get_description(title);
+
+		setDescription(description)
+	}, [title])
+
+	useEffect(() => {
+		getDescription();
+	}, [title])
+
 	return (
 		<div className='bg-blue-gray-200 p-5 rounded'>
 			<Typography variant='h2' color='blue-gray'>
