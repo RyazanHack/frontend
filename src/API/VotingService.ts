@@ -7,8 +7,9 @@ interface GetCountVotesRequest {
 }
 
 interface UpvoteRequest {
-	countVotes: number
 	region: string
+	stage: 1 | 2
+	amount: number
 }
 
 interface GetCountVotesResponse {
@@ -32,8 +33,8 @@ export default class VotingService {
 		return response.data
 	}
 
-	public static async upvote(region: string, stage: 1 | 2) {
-		const token = localStorage["token"];
+	public static async upvote(region: string, stage: 1 | 2, amount: number) {
+		const token = localStorage['token']
 		let config = {
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -43,12 +44,11 @@ export default class VotingService {
 		const requestData: UpvoteRequest = {
 			region,
 			stage,
+			amount,
 		}
-		const response = await axios.post(
-			this.API + `/votes/upvote`,
-			requestData,
-			config
-		)
-		return response.data
+		const response = await axios
+			.post(this.API + `/votes/upvote`, requestData, config)
+			.catch(e => alert('Недостаточно голосов'))
+		return response
 	}
 }
